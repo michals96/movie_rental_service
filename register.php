@@ -11,12 +11,12 @@ class Register
 		or die('Cannot connect: ' . pg_last_error());
 		$login = $_POST['login'];
 		$haslo = $_POST['haslo'];
-		if($query = pg_query("SELECT * from czytelnik WHERE login='$login' AND haslo='$haslo'"))
+		if($query = pg_query("SELECT * from widz WHERE login='$login' AND haslo='$haslo'"))
 		{
 			if(pg_num_rows($query) > 0)
 			{
 				$row = pg_fetch_assoc($query);
-				$_SESSION['id'] = $row['czytelnik_id'];
+				$_SESSION['id'] = $row['widz_id'];
 				$_SESSION['login'] = $row['login'];
 				$_SESSION['imie'] = $row['imie'];
 				$_SESSION['dostep'] = $row['dostep'];
