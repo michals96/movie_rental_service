@@ -160,11 +160,10 @@ include 'queries.php';
                             ";
                 $action = 'index';
                 if (isset($_GET['action'])) {
-                    $action = $_GET['action'];
-                }
+                        $action = $_GET['action'];
+                    }
                 $akcja = new queries;
-                switch ($action): 
-                    case 'movies':
+                switch ($action): case 'movies':
                         $akcja->movies();
                         break;
                     case 'add_movie':
@@ -204,7 +203,30 @@ include 'queries.php';
                         $akcja->manage_rents();
                         break;
                 endswitch;
-            } else { }
+            } else {
+                    echo "<nav>
+                <a href='index.php'> MENU </a><br/>
+                <a href='index.php?action=show_specimen'> List specimen </a><br/>
+                <a href='index.php?action=my_bookings'> Moje rezerwacje </a><br/>
+                <a href='index.php?action=my_rents'> Moje wypozyczenia </a><br/>
+                </nav>";
+                    $action = 'index';
+                    if (isset($_GET['action'])) {
+                            $action = $_GET['action'];
+                        }
+                    $akcja = new queries;
+                    switch ($action): 
+                        case 'show_specimen':
+                            $akcja->show_specimen();
+                            break;
+                        case 'my_bookings':
+                            $akcja->my_bookings();
+                            break;
+                        case 'my_rents':
+                            $akcja->my_rents();
+                            break;
+                    endswitch;
+                }
         } else {
             echo "<h1> Witaj w wypozyczalni filmow</h1>
                 <h2> Zaloguj sie aby rozpoczac </h2>

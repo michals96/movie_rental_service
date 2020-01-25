@@ -407,6 +407,36 @@ class queries
 		
         pg_free_result($query);
         
+    }
+
+    // listuje zamowione filmy usera
+    function my_bookings()
+	{
+		$query = pg_query("select * from list_reservations WHERE widz_id=$_SESSION[id];");
+		
+		echo "<table>";
+		echo "<tr> <th>Date</th> <th>Up-to-date</th> <th>Title</th></tr>";
+		while ($row = pg_fetch_row($query))
+		{
+			echo "<tr>  <td>$row[1]</td> <td>$row[2]</td> <td>$row[7]</td></tr>";
+		}
+		echo "</table>";
+		pg_free_result($query);
+	}
+    
+    // listuje filmy wypozyczone przez usera
+	function my_rents()
+	{
+		$query = pg_query("select * from list_rents WHERE widz_id=$_SESSION[id];");
+		
+		echo "<table>";
+		echo "<tr> <th>Date start</th> <th>Date end</th> <th>Title</th></tr>";
+		while ($row = pg_fetch_row($query))
+		{
+			echo "<tr>  <td>$row[1]</td> <td>$row[2]</td> <td>$row[7]</td></tr>";
+		}
+		echo "</table>";
+		pg_free_result($query);
 	}
 }
 ?>
