@@ -18,7 +18,7 @@ include 'queries.php';
     <title>Wypozyczalnia filmow</title>
     <style type="text/css">
         html {
-            background-image: url(bck.jpg) no-repeat center center fixed;
+            background: url(bck.jpg) no-repeat center center fixed;
             background-size: cover;
             height: 100%;
             overflow: hidden;
@@ -96,7 +96,7 @@ include 'queries.php';
 
         a {
             text-decoration: none;
-            color: red;
+            color: white;
         }
     </style>
 </head>
@@ -134,36 +134,43 @@ include 'queries.php';
 
         <?php
         if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
-                // funkcjonalnosci admina
-                if ($_SESSION['imie'] == 'admin') {
-                        echo
-                            "<a href='index.php'> Strona główna </a><br/>
-                    <a href='index.php?action=movies'> Wyświetl filmy</a><br/>
-                    <a href='index.php?action=add_movie'> Dodaj film</a><br/>";
-                        $action = 'index';
-                        if (isset($_GET['action'])) {
-                                $action = $_GET['action'];
-                            }
-                        $akcja = new queries;
-                        switch ($action): case 'movies':
-                                $akcja->movies();
-                                break;
-                        endswitch;
-                    } else { }
-            } else {
-                echo "<h1> Witaj w wypozyczalni filmow</h1>
+            // funkcjonalnosci admina
+            if ($_SESSION['imie'] == 'admin') {
+                echo
+                    "<a href='index.php'> Strona główna </a>
+
+                            <a href='index.php?action=movies'> Wyświetl filmy </a>
+                            <a href='index.php?action=add_movie'> Dodaj film </a><br/>
+                            
+                            ";
+                $action = 'index';
+                if (isset($_GET['action'])) {
+                    $action = $_GET['action'];
+                }
+                $akcja = new queries;
+                switch ($action): 
+                    case 'movies':
+                        $akcja->movies();
+                        break;
+                    case 'add_movie':
+                        $akcja->add_movie();
+                        break;
+                endswitch;
+            } else { }
+        } else {
+            echo "<h1> Witaj w wypozyczalni filmow</h1>
                 <h2> Zaloguj sie aby rozpoczac </h2>
                 <h3> Credentials: </h3>
                 <h4> ROOT: admin:admin</h4>
                 <h4> USER: michal:haslo </h4>";
-                echo "<form action='login.php' method='post'>
+            echo "<form action='login.php' method='post'>
                 Login: <input type='text' name='login'><br/>
                 Password: <input type='password' name='haslo'><br/>
                 <input type='submit' value='Zaloguj'>
                 </form>";
-                if (isset($_SESSION['error']))
-                    echo $_SESSION['error'];
-            }
+            if (isset($_SESSION['error']))
+                echo $_SESSION['error'];
+        }
         ?>
     </div>
     <img src="logo.png">

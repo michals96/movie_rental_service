@@ -1,4 +1,4 @@
---wyswietl rezyserow
+--wyswietl rezyserow, korzystam z tej funkcji przy listowaniu filmow w kolumnie 'Rezyser'
 CREATE OR REPLACE FUNCTION show_directors(integer) RETURNS VARCHAR AS $$
 	DECLARE 
 		directors VARCHAR;
