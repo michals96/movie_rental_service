@@ -2,9 +2,11 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+include 'queries.php';
 ?>
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,10 +15,10 @@ ini_set('display_errors', 1);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
-    <title>LIBRARY</title>
+    <title>Wypozyczalnia filmow</title>
     <style type="text/css">
         html {
-            background: url(bck.jpg) no-repeat center center fixed;
+            background-image: url(bck.jpg) no-repeat center center fixed;
             background-size: cover;
             height: 100%;
             overflow: hidden;
@@ -91,6 +93,11 @@ ini_set('display_errors', 1);
             background-color: #008CBA;
             color: white;
         }
+
+        a {
+            text-decoration: none;
+            color: red;
+        }
     </style>
 </head>
 
@@ -124,31 +131,40 @@ ini_set('display_errors', 1);
         </ul>
     </nav>
     <div id='container'>
-        <h1> Library management system </h1>
-        <h2> Please log-in to begin </h2>
-        <h3> Credentials: </h3>
-        <h4> admin:admin</h4>
-        <h4> user:user </h4>
-            <?php
-            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true)
-            {
-                if($_SESSION['imie'] == 'admin')
-                {
-                    echo
-                    "<a href='logout.php'> Wyloguj sie </a><br/>";
-                }
+
+        <?php
+        if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
+                // funkcjonalnosci admina
+                if ($_SESSION['imie'] == 'admin') {
+                        echo
+                            "<a href='index.php'> Strona główna </a><br/>
+                    <a href='index.php?action=movies'> Wyświetl filmy</a><br/>
+                    <a href='index.php?action=add_movie'> Dodaj film</a><br/>";
+                        $action = 'index';
+                        if (isset($_GET['action'])) {
+                                $action = $_GET['action'];
+                            }
+                        $akcja = new queries;
+                        switch ($action): case 'movies':
+                                $akcja->movies();
+                                break;
+                        endswitch;
+                    } else { }
+            } else {
+                echo "<h1> Witaj w wypozyczalni filmow</h1>
+                <h2> Zaloguj sie aby rozpoczac </h2>
+                <h3> Credentials: </h3>
+                <h4> ROOT: admin:admin</h4>
+                <h4> USER: michal:haslo </h4>";
+                echo "<form action='login.php' method='post'>
+                Login: <input type='text' name='login'><br/>
+                Password: <input type='password' name='haslo'><br/>
+                <input type='submit' value='Zaloguj'>
+                </form>";
+                if (isset($_SESSION['error']))
+                    echo $_SESSION['error'];
             }
-            else
-            {
-		    echo "<form action='login.php' method='post'>
-		    Login: <input type='text' name='login'><br/>
-		    Password: <input type='password' name='haslo'><br/>
-		    <input type='submit' value='Zaloguj'>
-		    </form>";
-		    if(isset($_SESSION['error']))
-			    echo $_SESSION['error'];
-            }
-            ?>
+        ?>
     </div>
     <img src="logo.png">
     <div class="footer">
