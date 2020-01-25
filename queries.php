@@ -180,6 +180,7 @@ class queries
 		pg_free_result($query);
     }
 
+    // Pozwala na dodanie obiektu do tabeli gatunek
     function add_type()
 	{
 		$query = pg_query("select * from gatunek");
@@ -198,31 +199,32 @@ class queries
 		pg_free_result($query);
 	}
     
+    // Pozwala dodawać egzemplarze
     function add_specimen()
 	{
 		$query = pg_query("select * from egzemplarz");
-		$queryks = pg_query("select * from film");
+		$specimen_query = pg_query("select * from film");
 		$count = pg_num_rows($query) + 1;
 		echo "<br/><form action='index.php?action=add_specimen' method='post'>
 		Title: 
-		<select name='ksiazka'>";
-		while($row = pg_fetch_row($queryks))
+		<select name='film_egzeplarz'>";
+		while($row = pg_fetch_row($specimen_query))
 		{
 			echo "<option value='$row[0]'>$row[1]</option>";
 		}
 		 echo "</select><br>
-		<input type='submit' value='dodaj'> </form>";
+		<input type='submit' value='Add specimen'> </form>";
 		
-		if(isset($_POST['ksiazka']))
+		if(isset($_POST['film_egzeplarz']))
 		{
-			$ins = "INSERT INTO egzemplarz VALUES('$count', '$_POST[ksiazka]', true)";
+			$ins = "INSERT INTO egzemplarz VALUES('$count', '$_POST[film_egzeplarz]', true)"; // jesli damy false to nie jest wpozyczony
 			$add = pg_query($ins);
 			print(pg_last_notice($this->dbconn));
 			pg_free_result($add);
 		}
 		
 		pg_free_result($query);
-		pg_free_result($queryks);
+		pg_free_result($specimen_query);
 	}
 } 
 ?>
