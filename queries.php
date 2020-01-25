@@ -289,5 +289,53 @@ class queries
 
         pg_free_result($query);
     }
+
+    // Listowanie rezerwacji -> dodawanie noywch rezerwacji
+    function manage_bookings()
+	{
+		$query = pg_query("SELECT * from list_reservations;");
+		
+		echo "<table>";
+		echo "<tr><th>Reservation number</th> <th>Datae</th> <th>Current date</th> <th>USER ID</th> <th>Name</th> <th>Surname</th>".
+		"<th>Specimen ID</th><th>Movie title</th></tr>";
+		while ($row = pg_fetch_row($query))
+		{
+			echo "<tr> <td>$row[0]</td> <td>$row[1]</td> <td>$row[2]</td> <td>$row[3]</td> <td>$row[4]</td> <td>$row[5]</td> <td>$row[6]</td> <td>$row[7]</td></tr>";
+		}
+		echo "</table>";
+        pg_free_result($query);
+
+        // pokaz opcje do rezerwacji
+        $queryczyt = pg_query("select widz_id, imie, nazwisko from widz;");
+		$queryegz = pg_query("select e.egzemplarz_id, f.tytul FROM egzemplarz as e, film as f WHERE f.film_id=f.film_id ORDER BY e.egzemplarz_id;");
+		
+		echo "<br/><form action='index.php?action=manage_bookings' method='post'>
+		 <br>
+		<select name='czytelnik'>";
+		while($row = pg_fetch_row($queryczyt))
+		{
+			echo "<option value='$row[0]'>$row[0] $row[1] $row[2]</option>";
+		}
+		echo "</select>";
+		echo "<select name='egz'>";
+		while($row = pg_fetch_row($queryegz))
+		{
+			echo "<option value='$row[0]'>$row[0] $row[1]</option>";
+		}
+		echo "</select><input type='submit' value='Zarezerwuj'> </form>";
+		
+		pg_free_result($queryczyt);
+		pg_free_result($queryegz);
+		
+		if(isset($_POST['czytelnik']) && isset($_POST['egz']))
+		{
+			$queryrez = pg_query("select * from zamowienie;");
+			$ile = pg_num_rows($queryrez) + 1;
+			$ins = "INSERT INTO zamowienie VALUES($ile, CURRENT_DATE, true, '$_POST[czytelnik]', '$_POST[egz]')";
+			$dodaj = pg_query($ins);
+			print(pg_last_notice($this->dbconn));
+			pg_free_result($dodaj);
+        }
+	}
 }
 ?>

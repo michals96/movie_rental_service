@@ -154,6 +154,8 @@ include 'queries.php';
 
 		                    <a href='index.php?action=show_users'> List users </a> 
                             <a href='index.php?action=add_user'> Add user </a><br/>
+
+                            <a href='index.php?action=manage_bookings'> Manage bookings </a><br/>
                             ";
                 $action = 'index';
                 if (isset($_GET['action'])) {
@@ -193,6 +195,9 @@ include 'queries.php';
                         break;
                     case 'show_specimen':
                         $akcja->show_specimen();
+                        break;
+                    case 'manage_bookings':
+                        $akcja->manage_bookings();
                         break;
                 endswitch;
             } else { }
