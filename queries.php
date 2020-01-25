@@ -180,24 +180,6 @@ class queries
 		pg_free_result($query);
     }
 
-  /*  // Pozwala na dodanie obiektu do tabeli gatunek
-    function add_type()
-	{
-		$query = pg_query("select * from gatunek");
-		$count = pg_num_rows($query) + 1;
-		echo "<br/><form action='index.php?action=add_type' method='post'>
-		Name: <input type='text' name='type'><br>
-		<input type='submit' value='Add type'> </form>";
-		
-		if(isset($_POST['nazwa']))
-		{
-			$ins = "INSERT INTO gatunek VALUES('$count', '$_POST[type]')";
-			$add = pg_query($ins);
-			pg_free_result($add);
-		}
-		
-		pg_free_result($query);
-    }*/
     function add_type()
 	{
 		$query = pg_query("select * from gatunek");
@@ -215,6 +197,32 @@ class queries
 		
 		pg_free_result($query);
 	}
-	
+    
+    function add_specimen()
+	{
+		$query = pg_query("select * from egzemplarz");
+		$queryks = pg_query("select * from film");
+		$count = pg_num_rows($query) + 1;
+		echo "<br/><form action='index.php?action=add_specimen' method='post'>
+		Title: 
+		<select name='ksiazka'>";
+		while($row = pg_fetch_row($queryks))
+		{
+			echo "<option value='$row[0]'>$row[1]</option>";
+		}
+		 echo "</select><br>
+		<input type='submit' value='dodaj'> </form>";
+		
+		if(isset($_POST['ksiazka']))
+		{
+			$ins = "INSERT INTO egzemplarz VALUES('$count', '$_POST[ksiazka]', true)";
+			$add = pg_query($ins);
+			print(pg_last_notice($this->dbconn));
+			pg_free_result($add);
+		}
+		
+		pg_free_result($query);
+		pg_free_result($queryks);
+	}
 } 
 ?>
