@@ -37,14 +37,18 @@ CREATE TABLE public.film (
                 CONSTRAINT film_id PRIMARY KEY (film_id)
 );
 
-
-CREATE TABLE public.widz_filmu (
-                widz_filmu_id INTEGER NOT NULL,
-                widz_id INTEGER NOT NULL,
-                film_id INTEGER NOT NULL,
-                CONSTRAINT widz_filmu_id PRIMARY KEY (widz_filmu_id)
+CREATE TABLE public.rezyser (
+                rezyser_id INTEGER NOT NULL,
+                imie VARCHAR NOT NULL,
+                nazwisko VARCHAR NOT NULL,
+                CONSTRAINT rezyser_id PRIMARY KEY (rezyser_id)
 );
 
+CREATE TABLE public.rezyser_filmu (
+                rezyser_id INTEGER NOT NULL,
+                film_id INTEGER NOT NULL,
+                CONSTRAINT public_key PRIMARY KEY (rezyser_id, film_id)
+);
 
 CREATE TABLE public.egzemplarz (
                 egzemplarz_id INTEGER NOT NULL,
@@ -52,7 +56,6 @@ CREATE TABLE public.egzemplarz (
                 czy_wypozyczony BOOLEAN NOT NULL,
                 CONSTRAINT egzemplarz_id PRIMARY KEY (egzemplarz_id)
 );
-
 
 CREATE TABLE public.zamowienie (
                 zamowienie_id INTEGER NOT NULL,
@@ -63,7 +66,6 @@ CREATE TABLE public.zamowienie (
                 CONSTRAINT zamowienie_id PRIMARY KEY (zamowienie_id)
 );
 
-
 CREATE TABLE public.wypozyczono (
                 wypozyczono_id INTEGER NOT NULL,
                 data_start DATE NOT NULL,
@@ -73,21 +75,12 @@ CREATE TABLE public.wypozyczono (
                 CONSTRAINT wypozyczono_id PRIMARY KEY (wypozyczono_id)
 );
 
-
-CREATE TABLE public.rezyser (
-                rezyser_id INTEGER NOT NULL,
-                imie VARCHAR NOT NULL,
-                nazwisko VARCHAR NOT NULL,
-                CONSTRAINT rezyser_id PRIMARY KEY (rezyser_id)
-);
-
-
-CREATE TABLE public.rezyser_filmu (
-                rezyser_id INTEGER NOT NULL,
+CREATE TABLE public.widz_filmu (
+                widz_filmu_id INTEGER NOT NULL,
+                widz_id INTEGER NOT NULL,
                 film_id INTEGER NOT NULL,
-                CONSTRAINT public_key PRIMARY KEY (rezyser_id, film_id)
+                CONSTRAINT widz_filmu_id PRIMARY KEY (widz_filmu_id)
 );
-
 
 ALTER TABLE public.wypozyczenie ADD CONSTRAINT widz_wypozyczenie_fk
 FOREIGN KEY (widz_id)

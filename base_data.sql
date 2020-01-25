@@ -34,86 +34,74 @@ INSERT INTO film VALUES(7, 'Forrest Gump', 5, 2);
 INSERT INTO film VALUES(8, 'Gwiezdne Wojny', 5, 3);
 
 --rezyserzy
-INSERT INTO rezyser VALUES(1, 'Thomas', 'Cormen', '01.01.1956');
-INSERT INTO rezyser VALUES(2, 'Charles', 'Leiserson', '01.01.1956');
-INSERT INTO rezyser VALUES(3, 'Ronald', 'Rivest', '01.01.1956');
-INSERT INTO rezyser VALUES(4, 'Clifford', 'Stein', '01.01.1956');
-INSERT INTO rezyser VALUES(5, 'Harper', 'Lee', '28.04.1926');
-INSERT INTO rezyser VALUES(6, 'Jon', 'Duckett', '24.09.1959');
-INSERT INTO rezyser VALUES(7, 'Jerzy', 'Grębosz', '19.10.1950');
-INSERT INTO rezyser VALUES(8, 'Jearl', 'Walker', '20.01.1945');
-INSERT INTO rezyser VALUES(9, 'David', 'Halliday', '03.03.1916');
-INSERT INTO rezyser VALUES(10, 'Robert', 'Resnick', '11.01.1923');
-INSERT INTO rezyser VALUES(11, 'Stephen', 'Prata', '27.05.1942');
-INSERT INTO rezyser VALUES(12, 'George', 'Martin', '20.09.1948');
+INSERT INTO rezyser VALUES(1, 'Quentin', 'Tarantino');
+INSERT INTO rezyser VALUES(2, 'Martin', 'Scorsese');
+INSERT INTO rezyser VALUES(3, 'Alejandro', 'Inarritu');
+INSERT INTO rezyser VALUES(4, 'Michal', 'Stefaniuk');
+INSERT INTO rezyser VALUES(5, 'Christopher', 'Nolan');
+INSERT INTO rezyser VALUES(6, 'Francis Ford', 'Copolla');
+INSERT INTO rezyser VALUES(7, 'Andrzej', 'Wajda');
 
---rezyserzy i ksiazki
+--rezyserzy filmow, powiazanie
 INSERT INTO rezyser_filmu VALUES(1, 1);
-INSERT INTO rezyser_filmu VALUES(2, 1);
-INSERT INTO rezyser_filmu VALUES(3, 1);
-INSERT INTO rezyser_filmu VALUES(4, 1);
-INSERT INTO rezyser_filmu VALUES(5, 2);
-INSERT INTO rezyser_filmu VALUES(6, 3);
-INSERT INTO rezyser_filmu VALUES(7, 4);
-INSERT INTO rezyser_filmu VALUES(8, 5);
-INSERT INTO rezyser_filmu VALUES(9, 5);
-INSERT INTO rezyser_filmu VALUES(10, 5);
-INSERT INTO rezyser_filmu VALUES(11, 6);
-INSERT INTO rezyser_filmu VALUES(12, 7);
-INSERT INTO rezyser_filmu VALUES(12, 8);
+INSERT INTO rezyser_filmu VALUES(2, 2);
+INSERT INTO rezyser_filmu VALUES(3, 3);
+INSERT INTO rezyser_filmu VALUES(4, 4);
+INSERT INTO rezyser_filmu VALUES(5, 5);
+INSERT INTO rezyser_filmu VALUES(6, 6);
+INSERT INTO rezyser_filmu VALUES(7, 7);
+INSERT INTO rezyser_filmu VALUES(1, 8);
 
 --egzemplarze
-INSERT INTO egzemplarz VALUES(1, 1, 2008, true);
-INSERT INTO egzemplarz VALUES(2, 2, 2018, true);
-INSERT INTO egzemplarz VALUES(3, 3, 2015, true);
-INSERT INTO egzemplarz VALUES(4, 4, 2008, true);
-INSERT INTO egzemplarz VALUES(5, 4, 2012, true);
-INSERT INTO egzemplarz VALUES(6, 4, 2016, true);
-INSERT INTO egzemplarz VALUES(7, 5, 1999, true);
-INSERT INTO egzemplarz VALUES(8, 5, 2010, true);
-INSERT INTO egzemplarz VALUES(9, 6, 2017, true);
-INSERT INTO egzemplarz VALUES(10, 7, 2005, true);
-INSERT INTO egzemplarz VALUES(11, 7, 2018, true);
-INSERT INTO egzemplarz VALUES(12, 8, 2018, true);
+INSERT INTO egzemplarz VALUES(1, 1, true);
+INSERT INTO egzemplarz VALUES(2, 2,true);
+INSERT INTO egzemplarz VALUES(3, 3, true);
+INSERT INTO egzemplarz VALUES(4, 4, true);
+INSERT INTO egzemplarz VALUES(5, 4, true);
+INSERT INTO egzemplarz VALUES(6, 4, true);
+INSERT INTO egzemplarz VALUES(7, 5, true);
+INSERT INTO egzemplarz VALUES(8, 5, true);
+INSERT INTO egzemplarz VALUES(9, 6, true);
+INSERT INTO egzemplarz VALUES(10, 7, true);
+INSERT INTO egzemplarz VALUES(11, 7, true);
+INSERT INTO egzemplarz VALUES(12, 8, true);
 
---rezerwacje
-INSERT INTO zamowienie VALUES(1, '28.07.2017', false, 2, 3);
-INSERT INTO zamowienie VALUES(2, '28.07.2017', false, 3, 1);
-INSERT INTO zamowienie VALUES(3, '28.07.2017', false, 2, 5);
-INSERT INTO zamowienie VALUES(4, '28.01.2018', false, 5, 4);
-INSERT INTO zamowienie VALUES(5, '28.07.2017', false, 4, 7);
+--zamowienia na filmy
+INSERT INTO zamowienie VALUES(1, '28.07.2020', false, 2, 3);
+INSERT INTO zamowienie VALUES(2, '28.07.2020', false, 3, 1);
+INSERT INTO zamowienie VALUES(3, '28.07.2020', false, 2, 5);
+INSERT INTO zamowienie VALUES(4, '28.01.2020', false, 5, 4);
+INSERT INTO zamowienie VALUES(5, '28.07.2020', false, 4, 7);
 update egzemplarz set czy_wypozyczony=true;
-INSERT INTO zamowienie VALUES(6, '28.07.2017', true, 3, 3);
+INSERT INTO zamowienie VALUES(6, '28.07.2020', true, 3, 3);
 
 --wypozyczenia
-INSERT INTO wypozyczono VALUES(1, '19.01.2018', NULL, 2, 4);
-INSERT INTO wypozyczono VALUES(2, '19.01.2018', NULL, 3, 5);
-INSERT INTO wypozyczono VALUES(3, '19.01.2018', NULL, 4, 7);
-INSERT INTO wypozyczono VALUES(4, '19.01.2018', NULL, 5, 8);
-INSERT INTO wypozyczono VALUES(5, '19.01.2018', NULL, 2, 1);
-INSERT INTO wypozyczono VALUES(6, '19.01.2018', NULL, 3, 2);
+INSERT INTO wypozyczono VALUES(1, '29.01.2020', NULL, 2, 4);
+INSERT INTO wypozyczono VALUES(2, '29.01.2020', NULL, 3, 5);
+INSERT INTO wypozyczono VALUES(3, '29.01.2020', NULL, 4, 7);
+INSERT INTO wypozyczono VALUES(4, '29.01.2020', NULL, 5, 8);
+INSERT INTO wypozyczono VALUES(5, '29.01.2020', NULL, 2, 1);
+INSERT INTO wypozyczono VALUES(6, '29.01.2020', NULL, 3, 2);
 UPDATE wypozyczono SET data_end=CURRENT_DATE;
-INSERT INTO wypozyczono VALUES(7, '19.01.2018', NULL, 2, 5);
-INSERT INTO wypozyczono VALUES(8, '19.01.2018', NULL, 3, 4);
-INSERT INTO wypozyczono VALUES(9, '19.01.2018', NULL, 4, 8);
-INSERT INTO wypozyczono VALUES(10, '19.01.2018', NULL, 5, 7);
-INSERT INTO wypozyczono VALUES(11, '19.01.2018', NULL, 2, 2);
-INSERT INTO wypozyczono VALUES(12, '19.01.2018', NULL, 3, 1);
+INSERT INTO wypozyczono VALUES(7, '29.01.2020', NULL, 2, 5);
+INSERT INTO wypozyczono VALUES(8, '29.01.2020', NULL, 3, 4);
+INSERT INTO wypozyczono VALUES(9, '29.01.2020', NULL, 4, 8);
+INSERT INTO wypozyczono VALUES(10, '29.01.2020', NULL, 5, 7);
+INSERT INTO wypozyczono VALUES(11, '29.01.2020', NULL, 2, 2);
+INSERT INTO wypozyczono VALUES(12, '29.01.2020', NULL, 3, 1);
 UPDATE wypozyczono SET data_end=CURRENT_DATE;
-INSERT INTO wypozyczono VALUES(13, '19.01.2018', NULL, 5, 5);
-INSERT INTO wypozyczono VALUES(14, '19.01.2018', NULL, 2, 7);
-INSERT INTO wypozyczono VALUES(15, '19.01.2018', NULL, 3, 4);
+INSERT INTO wypozyczono VALUES(13, '29.01.2020', NULL, 5, 5);
 
---opinie
-INSERT INTO widz_filmu VALUES(1, 9, 2, 4);
-INSERT INTO widz_filmu VALUES(2, 9, 2, 5);
-INSERT INTO widz_filmu VALUES(3, 9, 2, 1);
-INSERT INTO widz_filmu VALUES(4, 9, 2, 2);
-INSERT INTO widz_filmu VALUES(5, 3, 3, 5);
-INSERT INTO widz_filmu VALUES(6, 2, 3, 4);
-INSERT INTO widz_filmu VALUES(7, 1, 3, 2);
-INSERT INTO widz_filmu VALUES(8, 10, 3, 1);
-INSERT INTO widz_filmu VALUES(9, 8, 4, 7);
-INSERT INTO widz_filmu VALUES(10, 7, 4, 8);
-INSERT INTO widz_filmu VALUES(11, 6, 5, 8);
-INSERT INTO widz_filmu VALUES(12, 5, 5, 7);
+--widzowie filmow, powiazania
+INSERT INTO widz_filmu VALUES(1, 2, 4);
+INSERT INTO widz_filmu VALUES(2, 2, 5);
+INSERT INTO widz_filmu VALUES(3, 2, 1);
+INSERT INTO widz_filmu VALUES(4, 2, 2);
+INSERT INTO widz_filmu VALUES(5, 3, 5);
+INSERT INTO widz_filmu VALUES(6, 3, 4);
+INSERT INTO widz_filmu VALUES(7, 3, 2);
+INSERT INTO widz_filmu VALUES(8, 3, 1);
+INSERT INTO widz_filmu VALUES(9, 4, 7);
+INSERT INTO widz_filmu VALUES(10, 4, 8);
+INSERT INTO widz_filmu VALUES(11, 5, 8);
+INSERT INTO widz_filmu VALUES(12, 5, 7);
