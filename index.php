@@ -140,7 +140,9 @@ include 'queries.php';
                     "<a href='index.php'> Strona główna </a>
 
                             <a href='index.php?action=movies'> Wyświetl filmy </a>
-                            <a href='index.php?action=add_movie'> Dodaj film </a><br/>
+                            <a href='index.php?action=add_movie'> Dodaj film </a>
+
+                            <a href='index.php?action=show_directors'> Pokaz rezyseroww </a><br/>
                             
                             ";
                 $action = 'index';
@@ -154,6 +156,9 @@ include 'queries.php';
                         break;
                     case 'add_movie':
                         $akcja->add_movie();
+                        break;
+                    case 'show_directors':
+                        $akcja->show_directors();
                         break;
                 endswitch;
             } else { }

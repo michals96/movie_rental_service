@@ -29,8 +29,9 @@ class queries
 		require_once 'connect_pascal.php';
 		$this->dbconn = pg_connect("host=$host user=$db_user password=$db_password dbname=$db_name")
 		or die('Nie można nawiązać połączenia: ' . pg_last_error());
-	}
-	
+    }
+    
+	// Listuje zawartosci tabeli film
 	function movies()
 	{
 		echo "<br/><form action='index.php?action=movies' method='post'><select name='sort'>
@@ -52,8 +53,9 @@ class queries
 		}
 		echo "</table>";
 		pg_free_result($query);
-	}
-	
+    }
+    
+	// Dodaje wiersze do tabeli film i umozliwia powiazanie nowego filmu ze studiem i gatunkiem
     function add_movie()
 	{
 		$query_wyd = pg_query("select studio_id, nazwa from studio");
@@ -87,5 +89,25 @@ class queries
 		pg_free_result($query);
 	}
 
+    function show_directors()
+	{
+		echo "<br/><form action='index.php?action=show_directors' method='post'><select name='sort'>
+		<option value='rezyser.imie'>Imie</option>
+		<option value='rezyser.nazwisko'>Nazwisko</option>
+		</select> <input type='submit' value='sortuj'> </form>";
+	if(!isset($_POST['sort']))
+		$sort = 'rezyser.nazwisko';
+	else
+		$sort = $_POST['sort'];
+		$query = pg_query("SELECT rezyser.imie, rezyser.nazwisko from rezyser ORDER BY $sort");
+		echo "<table>";
+		echo "<tr><td>Imię</td> <td>Nazwisko</td>";
+		while ($row = pg_fetch_row($query))
+		{
+			echo "<tr> <td>$row[0]</td> <td>$row[1]</td></tr>";
+		}
+		echo "</table>";
+		pg_free_result($query);
+	}
 }
 ?>
