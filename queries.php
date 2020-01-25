@@ -227,24 +227,25 @@ class queries
         $count = pg_num_rows($query) + 1;
         echo "<br/><form action='index.php?action=add_user' method='post'>
 
-		Imie: <input type='text' name='imie'><br>
-		Nazwisko: <input type='text' name='nazwisko'><br>
-		Data urodzenia: <input type='text' name='urodz' value='DD.MM.RRRR'><br>
-		Login: <input type='text' name='login'><br>
-        Haslo: <input type='text' name='haslo'><br>
+        Name: <input type='text' name='name'><br>
         
-		Przywilej: 
-		<select name='przywilej'>
-		<option value='admin'>admin</option>
-		<option value='czytelnik'>czytelnik</option>
+		Surname: <input type='text' name='surname'><br>
+		Date of birth: <input type='text' name='birth' value='DD.MM.RRRR'><br>
+		Login: <input type='text' name='login'><br>
+        Password: <input type='text' name='password'><br>
+        
+		Access: 
+		<select name='access'>
+		<option value='admin'>root</option>
+		<option value='user'>user</option>
         </select> <br>
 
         Uczelnia: <input type='text' name='adres'><br>
 
-		<input type='submit' value='dodaj'> </form>";
+		<input type='submit' value='Add'> </form>";
 
-        if (isset($_POST['imie']) && isset($_POST['nazwisko']) && isset($_POST['adres']) && isset($_POST['urodz']) && isset($_POST['login']) && isset($_POST['haslo']) && isset($_POST['przywilej'])) {
-                $ins = "INSERT INTO widz VALUES('$count', '$_POST[imie]', '$_POST[nazwisko]', '$_POST[urodz]', '$_POST[login]', '$_POST[haslo]', '$_POST[przywilej]', '$_POST[adres]')";
+        if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['adres']) && isset($_POST['birth']) && isset($_POST['login']) && isset($_POST['password']) && isset($_POST['access'])) {
+                $ins = "INSERT INTO widz VALUES('$count', '$_POST[name]', '$_POST[surname]', '$_POST[birth]', '$_POST[login]', '$_POST[password]', '$_POST[access]', '$_POST[adres]')";
                 $add = pg_query($ins);
                 pg_free_result($add);
             }
