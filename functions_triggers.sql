@@ -25,3 +25,13 @@ widz as w,
 egzemplarz as e, 
 film as f 
 WHERE z.widz_id=w.widz_id AND z.egzemplarz_id=e.egzemplarz_id AND e.film_id=f.film_id;
+
+--widdok odpowiedzialny za listowawnie wypozyczen
+create view list_rents 
+as select wyp.wypozyczono_id, wyp.data_start, wyp.data_end, w.widz_id, w.imie, w.nazwisko, e.egzemplarz_id, f.tytul 
+FROM 
+wypozyczono as wyp, 
+widz as w, 
+egzemplarz as e, 
+film as f 
+WHERE wyp.widz_id=w.widz_id AND wyp.egzemplarz_id=e.egzemplarz_id AND e.film_id=f.film_id;

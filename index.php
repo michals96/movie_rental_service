@@ -156,6 +156,7 @@ include 'queries.php';
                             <a href='index.php?action=add_user'> Add user </a><br/>
 
                             <a href='index.php?action=manage_bookings'> Manage bookings </a><br/>
+                            <a href='index.php?action=manage_rents'> Manage rents </a><br/>
                             ";
                 $action = 'index';
                 if (isset($_GET['action'])) {
@@ -198,6 +199,9 @@ include 'queries.php';
                         break;
                     case 'manage_bookings':
                         $akcja->manage_bookings();
+                        break;
+                    case 'manage_rents':
+                        $akcja->manage_rents();
                         break;
                 endswitch;
             } else { }

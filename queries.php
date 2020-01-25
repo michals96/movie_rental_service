@@ -336,6 +336,77 @@ class queries
 			print(pg_last_notice($this->dbconn));
 			pg_free_result($add);
         }
+    }
+    
+    //listowanie wypozyczen -> dodawanie wypozyczen
+    function manage_rents()
+	{
+		$query = pg_query("select * from list_rents;");
+		
+		echo "<table>";
+		echo "<tr><th>ID</th> <th>Date start</th> <th>Date end</th> <th>USER ID</th> <th>Name</th> <th>Surname</th>".
+		"<th>SPECIMEN ID</th><th>Title</th></tr>";
+		while ($row = pg_fetch_row($query))
+		{
+			echo "<tr> <td>$row[0]</td> <td>$row[1]</td> <td>$row[2]</td> <td>$row[3]</td> <td>$row[4]</td> <td>$row[5]</td> <td>$row[6]</td> <td>$row[7]</td></tr>";
+		}
+		echo "</table>";
+		pg_free_result($query);
+        
+        // pokaz opcje do wypozyczenia
+        /*
+		$queryczyt = pg_query("select czytelnik_id, imie, nazwisko from czytelnik;");
+		$queryegz = pg_query("select e.egz_id, k.tytul, e.rok from egzemplarz as e, ksiazka as k WHERE e.ksiazka_id=k.ksiazka_id ORDER BY e.egz_id;");
+		
+		echo "<br/><form action='index.php?action=manage_rents' method='post'>
+		 <br>
+		<select name='czytelnik'>";
+		while($row = pg_fetch_row($queryczyt))
+		{
+			echo "<option value='$row[0]'>$row[0] $row[1] $row[2]</option>";
+		}
+		echo "</select>";
+		echo "<select name='egz'>";
+		while($row = pg_fetch_row($queryegz))
+		{
+			echo "<option value='$row[0]'>$row[0] $row[1] $row[2]</option>";
+		}
+		echo "</select><input type='submit' value='Wypozycz'> </form>";
+		
+		
+		pg_free_result($queryczyt);
+		pg_free_result($queryegz);
+		
+		if(isset($_POST['czytelnik']) && isset($_POST['egz']))
+		{
+			$queryrez = pg_query("select * from wypozyczenie;");
+			$ile = pg_num_rows($queryrez) + 1;
+			$ins = "INSERT INTO wypozyczenie VALUES($ile, CURRENT_DATE, NULL, '$_POST[czytelnik]', '$_POST[egz]')";
+			$dodaj = pg_query($ins);
+			print(pg_last_notice($this->dbconn));
+			pg_free_result($dodaj);
+		}
+		
+		$query = pg_query("select * from wyswietlanie_wyp WHERE data_oddania IS NULL;");
+		echo "<br/><form action='index.php?action=zarzadzaj_wypozyczeniami' method='post'>
+		 <br>
+		<select name='oddanie'>";
+		while($row = pg_fetch_row($query))
+		{
+			echo "<option value='$row[0]'>$row[0] $row[1] $row[2] $row[3] $row[4] $row[5] $row[6] $row[7]</option>";
+		}
+		echo "</select><input type='submit' value='Oddano'> </form>";
+		
+		if(isset($_POST['oddanie']))
+		{
+			$up = "UPDATE wypozyczenie SET data_oddania=CURRENT_DATE WHERE wyp_id=$_POST[oddanie]";
+			$dodaj = pg_query($up);
+			print(pg_last_notice($this->dbconn));
+			pg_free_result($dodaj);
+		}
+		
+        pg_free_result($query);
+        */
 	}
 }
 ?>
