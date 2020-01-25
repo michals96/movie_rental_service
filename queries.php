@@ -354,13 +354,13 @@ class queries
 		pg_free_result($query);
         
         // pokaz opcje do wypozyczenia
-        /*
-		$queryczyt = pg_query("select czytelnik_id, imie, nazwisko from czytelnik;");
-		$queryegz = pg_query("select e.egz_id, k.tytul, e.rok from egzemplarz as e, ksiazka as k WHERE e.ksiazka_id=k.ksiazka_id ORDER BY e.egz_id;");
+		$queryczyt = pg_query("select widz_id, imie, nazwisko from widz;");
+        $queryegz = pg_query("select e.egzemplarz_id, f.tytul from egzemplarz as e, 
+        film as f WHERE e.film_id=f.film_id ORDER BY e.egzemplarz_id;");
 		
 		echo "<br/><form action='index.php?action=manage_rents' method='post'>
 		 <br>
-		<select name='czytelnik'>";
+		<select name='user'>";
 		while($row = pg_fetch_row($queryczyt))
 		{
 			echo "<option value='$row[0]'>$row[0] $row[1] $row[2]</option>";
@@ -371,42 +371,42 @@ class queries
 		{
 			echo "<option value='$row[0]'>$row[0] $row[1] $row[2]</option>";
 		}
-		echo "</select><input type='submit' value='Wypozycz'> </form>";
+		echo "</select><input type='submit' value='Rent a movie'> </form>";
 		
 		
 		pg_free_result($queryczyt);
 		pg_free_result($queryegz);
 		
-		if(isset($_POST['czytelnik']) && isset($_POST['egz']))
+		if(isset($_POST['user']) && isset($_POST['egz']))
 		{
-			$queryrez = pg_query("select * from wypozyczenie;");
+			$queryrez = pg_query("select * from wypozyczono;");
 			$ile = pg_num_rows($queryrez) + 1;
-			$ins = "INSERT INTO wypozyczenie VALUES($ile, CURRENT_DATE, NULL, '$_POST[czytelnik]', '$_POST[egz]')";
-			$dodaj = pg_query($ins);
+			$ins = "INSERT INTO wypozyczono VALUES($ile, CURRENT_DATE, NULL, '$_POST[user]', '$_POST[egz]')";
+			$add = pg_query($ins);
 			print(pg_last_notice($this->dbconn));
-			pg_free_result($dodaj);
+			pg_free_result($add);
 		}
 		
-		$query = pg_query("select * from wyswietlanie_wyp WHERE data_oddania IS NULL;");
-		echo "<br/><form action='index.php?action=zarzadzaj_wypozyczeniami' method='post'>
+		$query = pg_query("select * from list_rents WHERE data_end IS NULL;");
+		echo "<br/><form action='index.php?action=manage_rents' method='post'>
 		 <br>
-		<select name='oddanie'>";
+		<select name='giveBack'>";
 		while($row = pg_fetch_row($query))
 		{
 			echo "<option value='$row[0]'>$row[0] $row[1] $row[2] $row[3] $row[4] $row[5] $row[6] $row[7]</option>";
 		}
-		echo "</select><input type='submit' value='Oddano'> </form>";
+		echo "</select><input type='submit' value='Given back'> </form>";
 		
-		if(isset($_POST['oddanie']))
+		if(isset($_POST['giveBack']))
 		{
-			$up = "UPDATE wypozyczenie SET data_oddania=CURRENT_DATE WHERE wyp_id=$_POST[oddanie]";
-			$dodaj = pg_query($up);
+			$up = "UPDATE wypozyczono SET data_end=CURRENT_DATE WHERE wypozyczono_id=$_POST[giveBack]";
+			$add = pg_query($up);
 			print(pg_last_notice($this->dbconn));
-			pg_free_result($dodaj);
+			pg_free_result($add);
 		}
 		
         pg_free_result($query);
-        */
+        
 	}
 }
 ?>
