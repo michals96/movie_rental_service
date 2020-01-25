@@ -306,35 +306,35 @@ class queries
         pg_free_result($query);
 
         // pokaz opcje do rezerwacji
-        $queryczyt = pg_query("select widz_id, imie, nazwisko from widz;");
-		$queryegz = pg_query("select e.egzemplarz_id, f.tytul FROM egzemplarz as e, film as f WHERE f.film_id=f.film_id ORDER BY e.egzemplarz_id;");
+        $q_user = pg_query("select widz_id, imie, nazwisko from widz;");
+		$q_egzemplarz = pg_query("select e.egzemplarz_id, f.tytul FROM egzemplarz as e, film as f WHERE f.film_id=f.film_id ORDER BY e.egzemplarz_id;");
 		
 		echo "<br/><form action='index.php?action=manage_bookings' method='post'>
 		 <br>
 		<select name='czytelnik'>";
-		while($row = pg_fetch_row($queryczyt))
+		while($row = pg_fetch_row($q_user))
 		{
 			echo "<option value='$row[0]'>$row[0] $row[1] $row[2]</option>";
 		}
 		echo "</select>";
 		echo "<select name='egz'>";
-		while($row = pg_fetch_row($queryegz))
+		while($row = pg_fetch_row($q_egzemplarz))
 		{
 			echo "<option value='$row[0]'>$row[0] $row[1]</option>";
 		}
 		echo "</select><input type='submit' value='Zarezerwuj'> </form>";
 		
-		pg_free_result($queryczyt);
-		pg_free_result($queryegz);
+		pg_free_result($q_user);
+		pg_free_result($q_egzemplarz);
 		
 		if(isset($_POST['czytelnik']) && isset($_POST['egz']))
 		{
-			$queryrez = pg_query("select * from zamowienie;");
-			$ile = pg_num_rows($queryrez) + 1;
-			$ins = "INSERT INTO zamowienie VALUES($ile, CURRENT_DATE, true, '$_POST[czytelnik]', '$_POST[egz]')";
-			$dodaj = pg_query($ins);
+			$q_rezerwacji = pg_query("select * from zamowienie;");
+			$count = pg_num_rows($q_rezerwacji) + 1;
+			$ins = "INSERT INTO zamowienie VALUES($count, CURRENT_DATE, true, '$_POST[czytelnik]', '$_POST[egz]')";
+			$add = pg_query($ins);
 			print(pg_last_notice($this->dbconn));
-			pg_free_result($dodaj);
+			pg_free_result($add);
         }
 	}
 }
