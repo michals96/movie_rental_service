@@ -16,13 +16,6 @@ CREATE UNIQUE INDEX widz_idx
  ON public.widz
  ( login );
 
-CREATE TABLE public.gatunek (
-                gatunek_id INTEGER NOT NULL,
-                nazwa VARCHAR NOT NULL,
-                CONSTRAINT kat_id PRIMARY KEY (gatunek_id)
-);
-
-
 CREATE TABLE public.studio (
                 studio_id INTEGER NOT NULL,
                 nazwa VARCHAR NOT NULL,
@@ -30,6 +23,11 @@ CREATE TABLE public.studio (
                 CONSTRAINT studio_id PRIMARY KEY (studio_id)
 );
 
+CREATE TABLE public.gatunek (
+                gatunek_id INTEGER NOT NULL,
+                nazwa VARCHAR NOT NULL,
+                CONSTRAINT kat_id PRIMARY KEY (gatunek_id)
+);
 
 CREATE TABLE public.film (
                 film_id INTEGER NOT NULL,
@@ -120,7 +118,7 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.film ADD CONSTRAINT studio_film_fk
-FOREIGN KEY (wydawnictwwo_id)
+FOREIGN KEY (studio_id)
 REFERENCES public.studio (studio_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
