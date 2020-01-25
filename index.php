@@ -149,6 +149,8 @@ include 'queries.php';
                             <a href='index.php?action=add_studio'> Add movie studio </a><br/>
                             <a href='index.php?action=add_type'> Add movie type </a><br/>
                             <a href='index.php?action=add_specimen'> Add specimen </a><br/>
+
+		                    <a href='index.php?action=show_users'> List users </a> 
                             <a href='index.php?action=add_user'> Add user </a><br/>
                             ";
                 $action = 'index';
@@ -180,6 +182,9 @@ include 'queries.php';
                         break;
                     case 'add_specimen':
                         $akcja->add_specimen();
+                        break;
+                    case 'show_users':
+                        $akcja->show_users();
                         break;
                     case 'add_user':
                         $akcja->add_user();
