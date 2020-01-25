@@ -147,6 +147,7 @@ include 'queries.php';
 
                             <a href='index.php?action=attatch_director'> Add director to movie </a><br/>
                             <a href='index.php?action=add_studio'> Add movie studio </a><br/>
+                            <a href='index.php?action=add_type'> Add movie type </a><br/>
                             
                             ";
                 $action = 'index';
@@ -172,6 +173,9 @@ include 'queries.php';
                         break;
                     case 'add_studio':
                         $akcja->add_studio();
+                        break;
+                    case 'add_type':
+                        $akcja->add_type();
                         break;
                 endswitch;
             } else { }
