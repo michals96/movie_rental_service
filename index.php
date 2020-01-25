@@ -137,13 +137,16 @@ include 'queries.php';
             // funkcjonalnosci admina
             if ($_SESSION['imie'] == 'admin') {
                 echo
-                    "<a href='index.php'> MENU </a>
+                    "<a href='index.php'> MENU </a><br/>
 
                             <a href='index.php?action=movies'> List movies </a>
-                            <a href='index.php?action=add_movie'> Add movie </a>
+                            <a href='index.php?action=add_movie'> Add movie </a><br/>
 
                             <a href='index.php?action=show_directors'> List directors </a>
                             <a href='index.php?action=add_director'> Add director </a><br/>
+
+                            <a href='index.php?action=attatch_director'> Add director to movie </a><br/>
+                            <a href='index.php?action=add_studio'> Add movie studio </a><br/>
                             
                             ";
                 $action = 'index';
@@ -163,6 +166,12 @@ include 'queries.php';
                         break;
                     case 'add_director':
                         $akcja->add_director();
+                        break;
+                    case 'attatch_director':
+                        $akcja->attatch_director();
+                        break;
+                    case 'add_studio':
+                        $akcja->add_studio();
                         break;
                 endswitch;
             } else { }
