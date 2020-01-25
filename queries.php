@@ -129,102 +129,127 @@ class queries
 
     // Pozwala dodac rezysera do filmu
     function attatch_director()
-	{
-		$q_rezysera = pg_query("SELECT rezyser_id, imie, nazwisko FROM rezyser");
-		$q_gatunku = pg_query("SELECT film_id, tytul FROM film");
-		
-		
-		echo "<br/><form action='index.php?action=attatch_director' method='post'>
+    {
+        $q_rezysera = pg_query("SELECT rezyser_id, imie, nazwisko FROM rezyser");
+        $q_gatunku = pg_query("SELECT film_id, tytul FROM film");
+
+
+        echo "<br/><form action='index.php?action=attatch_director' method='post'>
 		 <br>
 		<select name='Rezyser'>";
-		while($row = pg_fetch_row($q_rezysera))
-		{
-			echo "<option value='$row[0]'>$row[1] $row[2]</option>";
-		}
-		echo "</select>";
-		echo "<select name='Film'>";
-		while($row = pg_fetch_row($q_gatunku))
-		{
-			echo "<option value='$row[0]'>$row[1]</option>";
-		}
-		echo "</select><input type='submit' value='Attatch'> </form>";
-		
-		if(isset($_POST['Rezyser']) && isset($_POST['Film']))
-		{
-			$ins = "INSERT INTO rezyser_filmu VALUES('$_POST[Rezyser]', '$_POST[Film]')";
-			$add = pg_query($ins);
-			pg_free_result($add);
-		}
-		
-		pg_free_result($q_rezysera);
-		pg_free_result($q_gatunku);
+        while ($row = pg_fetch_row($q_rezysera)) {
+                echo "<option value='$row[0]'>$row[1] $row[2]</option>";
+            }
+        echo "</select>";
+        echo "<select name='Film'>";
+        while ($row = pg_fetch_row($q_gatunku)) {
+                echo "<option value='$row[0]'>$row[1]</option>";
+            }
+        echo "</select><input type='submit' value='Attatch'> </form>";
+
+        if (isset($_POST['Rezyser']) && isset($_POST['Film'])) {
+                $ins = "INSERT INTO rezyser_filmu VALUES('$_POST[Rezyser]', '$_POST[Film]')";
+                $add = pg_query($ins);
+                pg_free_result($add);
+            }
+
+        pg_free_result($q_rezysera);
+        pg_free_result($q_gatunku);
     }
-    
+
     // Pozwala na dodanie obiektu do tabeli studio
     function add_studio()
-	{
-		$query = pg_query("select * from studio");
-		$count = pg_num_rows($query) + 1;
-		echo "<br/><form action='index.php?action=add_studio' method='post'>
+    {
+        $query = pg_query("select * from studio");
+        $count = pg_num_rows($query) + 1;
+        echo "<br/><form action='index.php?action=add_studio' method='post'>
 		Name: <input type='text' name='cityName'><br>
 		City: <input type='text' name='name'><br>
 		<input type='submit' value='Add'> </form>";
-		
-		if(isset($_POST['cityName']) && isset($_POST['name']))
-		{
-			$ins = "INSERT INTO studio VALUES('$count', '$_POST[cityName]', '$_POST[name]')";
-			$add = pg_query($ins);
-			pg_free_result($add);
-		}
-		
-		pg_free_result($query);
+
+        if (isset($_POST['cityName']) && isset($_POST['name'])) {
+                $ins = "INSERT INTO studio VALUES('$count', '$_POST[cityName]', '$_POST[name]')";
+                $add = pg_query($ins);
+                pg_free_result($add);
+            }
+
+        pg_free_result($query);
     }
 
     // Pozwala na dodanie obiektu do tabeli gatunek
     function add_type()
-	{
-		$query = pg_query("select * from gatunek");
-		$count = pg_num_rows($query) + 1;
-		echo "<br/><form action='index.php?action=add_type' method='post'>
+    {
+        $query = pg_query("select * from gatunek");
+        $count = pg_num_rows($query) + 1;
+        echo "<br/><form action='index.php?action=add_type' method='post'>
 		Type: <input type='text' name='type'><br>
 		<input type='submit' value='Add type'> </form>";
-		
-		if(isset($_POST['type']))
-		{
-			$ins = "INSERT INTO gatunek VALUES('$count', '$_POST[type]')";
-			$add = pg_query($ins);
-			pg_free_result($add);
-		}
-		
-		pg_free_result($query);
-	}
-    
+
+        if (isset($_POST['type'])) {
+                $ins = "INSERT INTO gatunek VALUES('$count', '$_POST[type]')";
+                $add = pg_query($ins);
+                pg_free_result($add);
+            }
+
+        pg_free_result($query);
+    }
+
     // Pozwala dodawać egzemplarze
     function add_specimen()
-	{
-		$query = pg_query("select * from egzemplarz");
-		$specimen_query = pg_query("select * from film");
-		$count = pg_num_rows($query) + 1;
-		echo "<br/><form action='index.php?action=add_specimen' method='post'>
+    {
+        $query = pg_query("select * from egzemplarz");
+        $specimen_query = pg_query("select * from film");
+        $count = pg_num_rows($query) + 1;
+        echo "<br/><form action='index.php?action=add_specimen' method='post'>
 		Title: 
 		<select name='film_egzeplarz'>";
-		while($row = pg_fetch_row($specimen_query))
-		{
-			echo "<option value='$row[0]'>$row[1]</option>";
-		}
-		 echo "</select><br>
+        while ($row = pg_fetch_row($specimen_query)) {
+                echo "<option value='$row[0]'>$row[1]</option>";
+            }
+        echo "</select><br>
 		<input type='submit' value='Add specimen'> </form>";
-		
-		if(isset($_POST['film_egzeplarz']))
-		{
-			$ins = "INSERT INTO egzemplarz VALUES('$count', '$_POST[film_egzeplarz]', true)"; // jesli damy false to nie jest wpozyczony
-			$add = pg_query($ins);
-			print(pg_last_notice($this->dbconn));
-			pg_free_result($add);
-		}
-		
-		pg_free_result($query);
-		pg_free_result($specimen_query);
-	}
-} 
+
+        if (isset($_POST['film_egzeplarz'])) {
+                $ins = "INSERT INTO egzemplarz VALUES('$count', '$_POST[film_egzeplarz]', true)"; // jesli damy false to nie jest wpozyczony
+                $add = pg_query($ins);
+                print(pg_last_notice($this->dbconn));
+                pg_free_result($add);
+            }
+
+        pg_free_result($query);
+        pg_free_result($specimen_query);
+    }
+
+    // Obsluga dodawania widzow filmow / uzytkownikow serwisu
+    function add_user()
+    {
+        $query = pg_query("select * from widz");
+        $count = pg_num_rows($query) + 1;
+        echo "<br/><form action='index.php?action=add_user' method='post'>
+
+		Imie: <input type='text' name='imie'><br>
+		Nazwisko: <input type='text' name='nazwisko'><br>
+		Data urodzenia: <input type='text' name='urodz' value='DD.MM.RRRR'><br>
+		Login: <input type='text' name='login'><br>
+        Haslo: <input type='text' name='haslo'><br>
+        
+		Przywilej: 
+		<select name='przywilej'>
+		<option value='admin'>admin</option>
+		<option value='czytelnik'>czytelnik</option>
+        </select> <br>
+
+        Uczelnia: <input type='text' name='adres'><br>
+
+		<input type='submit' value='dodaj'> </form>";
+
+        if (isset($_POST['imie']) && isset($_POST['nazwisko']) && isset($_POST['adres']) && isset($_POST['urodz']) && isset($_POST['login']) && isset($_POST['haslo']) && isset($_POST['przywilej'])) {
+                $ins = "INSERT INTO widz VALUES('$count', '$_POST[imie]', '$_POST[nazwisko]', '$_POST[urodz]', '$_POST[login]', '$_POST[haslo]', '$_POST[przywilej]', '$_POST[adres]')";
+                $add = pg_query($ins);
+                pg_free_result($add);
+            }
+
+        pg_free_result($query);
+    }
+}
 ?>
