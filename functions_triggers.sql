@@ -8,3 +8,10 @@ CREATE OR REPLACE FUNCTION show_directors(integer) RETURNS VARCHAR AS $$
 	END;
 
 $$LANGUAGE 'plpgsql';
+
+--widok pozwala na listowanie egzemplarzy
+create view list_specimen
+as select film.tytul, show_directors(film.film_id), studio.nazwa 
+AS studioName, studio.nazwa AS typeName, egzemplarz.czy_wypozyczony, egzemplarz.egzemplarz_id 
+from egzemplarz, film, studio, gatunek 
+WHERE film.film_id=egzemplarz.film_id AND film.studio_id=studio.studio_id AND film.gatunek_id=gatunek.gatunek_id;

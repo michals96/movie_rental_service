@@ -194,6 +194,20 @@ class queries
         pg_free_result($query);
     }
 
+    // Listuje zawartosc tabeli egzemplarz
+    function show_specimen()
+	{
+		$query = pg_query("SELECT * from list_specimen ORDER BY egzemplarz_id");
+		echo "<table>";
+		echo "<tr><th>ID</th><th>Title</th><th>Director</th><th>Studio</th><th>Availabilty</th> </tr>";
+		while ($row = pg_fetch_row($query))
+		{
+            echo "<tr> <td>$row[5]</td><td>$row[0]</td> <td>$row[1]</td> <td>$row[3]</td> <td>$row[4]</td> </tr>";
+		}
+		echo "</table>";
+		pg_free_result($query);
+    }
+    
     // Pozwala dodawać egzemplarze
     function add_specimen()
     {

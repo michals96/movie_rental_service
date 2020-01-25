@@ -148,6 +148,8 @@ include 'queries.php';
                             <a href='index.php?action=attatch_director'> Add director to movie </a><br/>
                             <a href='index.php?action=add_studio'> Add movie studio </a><br/>
                             <a href='index.php?action=add_type'> Add movie type </a><br/>
+
+                            <a href='index.php?action=show_specimen'> List specimen </a>
                             <a href='index.php?action=add_specimen'> Add specimen </a><br/>
 
 		                    <a href='index.php?action=show_users'> List users </a> 
@@ -188,6 +190,9 @@ include 'queries.php';
                         break;
                     case 'add_user':
                         $akcja->add_user();
+                        break;
+                    case 'show_specimen':
+                        $akcja->show_specimen();
                         break;
                 endswitch;
             } else { }
