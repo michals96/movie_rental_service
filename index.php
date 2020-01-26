@@ -206,9 +206,9 @@ include 'queries.php';
             } else {
                     echo "<nav>
                 <a href='index.php'> MENU </a><br/>
-                <a href='index.php?action=show_specimen'> List specimen </a><br/>
-                <a href='index.php?action=my_bookings'> My reservations </a><br/>
-                <a href='index.php?action=my_rents'> My rents </a><br/>
+                <a href='index.php?action=show_specimen'> List specimen </a>
+                <a href='index.php?action=my_bookings'> My reservations </a>
+                <a href='index.php?action=my_rents'> My rents </a>
                 </nav>";
                     $action = 'index';
                     if (isset($_GET['action'])) {

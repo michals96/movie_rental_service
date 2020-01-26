@@ -68,7 +68,7 @@ CREATE TRIGGER reservation_trigger BEFORE INSERT ON zamowienie FOR EACH ROW EXEC
 CREATE OR REPLACE FUNCTION make_rent() RETURNS TRIGGER AS $$
 	DECLARE
 		flag_ifAvailable boolean;
-		count integer;
+		count_var integer;
 	BEGIN
 	SELECT czy_wypozyczony INTO flag_ifAvailable FROM egzemplarz WHERE egzemplarz_id=new.egzemplarz_id;
 	
@@ -77,8 +77,8 @@ CREATE OR REPLACE FUNCTION make_rent() RETURNS TRIGGER AS $$
 		RAISE INFO 'Rent made';
 		RETURN new;
 	ELSE
-		SELECT COUNT(*) INTO count FROM zamowienie WHERE egzemplarz_id=new.egzemplarz_id AND widz_id=new.widz_id AND termin=true;
-		IF count!=0
+		SELECT COUNT(*) INTO count_var FROM zamowienie WHERE egzemplarz_id=new.egzemplarz_id AND widz_id=new.widz_id AND termin=true;
+		IF count_var!=0
 			THEN UPDATE zamowienie SET termin=false WHERE egzemplarz_id=new.egzemplarz_id AND widz_id=new.widz_id;
 			RAISE INFO 'Rent made';
 			RETURN new;
