@@ -103,10 +103,10 @@ include 'queries.php';
 
 <body>
     <script src='script.js'> </script>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <ul class="navbar-nav">
+    <nav class='navbar navbar-expand-sm bg-dark navbar-dark'>
+        <ul class='navbar-nav'>
 
-            <li class="nav-item active">
+            <li class='nav-item active'>
                 <?php
                 if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
                     echo "<a class='nav-link' href='#'>" . $_SESSION['imie'] . "</a>";
@@ -114,79 +114,114 @@ include 'queries.php';
                     echo "<a class='nav-link' href='#'> Guest </a>";
                 }
                 ?>
-
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.php">Main page</a>
+            <?php
+            if (isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['imie'] == 'admin')
+            {
+                echo"
+                <li class='nav-item'>
+                <a class='nav-link' href='index.php'>Main page</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                     Movies
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="index.php?action=movies">List movies</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.php?action=add_movie">Add movie</a>
+                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a class='dropdown-item' href='index.php?action=movies'>List movies</a>
+                    <div class='dropdown-divider'></div>
+                    <a class='dropdown-item' href='index.php?action=add_movie'>Add movie</a>
                 </div>
                 
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                     Directors
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="index.php?action=show_directors">List directors</a>
-                    <a class="dropdown-item" href="index.php?action=add_director">Add directors</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.php?action=attatch_director">Attatch director</a>
+                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a class='dropdown-item' href='index.php?action=show_directors'>List directors</a>
+                    <a class='dropdown-item' href='index.php?action=add_director'>Add directors</a>
+                    <div class='dropdown-divider'></div>
+                    <a class='dropdown-item' href='index.php?action=attatch_director'>Attatch director</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                     Studios
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="index.php?action=add_studio">Add movie studio</a>
+                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a class='dropdown-item' href='index.php?action=add_studio'>Add movie studio</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                     Category
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="index.php?action=add_type">Add movie type</a>
+                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a class='dropdown-item' href='index.php?action=add_type'>Add movie type</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                     Specimen
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="index.php?action=show_specimen">List specimen</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.php?action=add_specimen">Add specimen</a>
+                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a class='dropdown-item' href='index.php?action=show_specimen'>List specimen</a>
+                    <div class='dropdown-divider'></div>
+                    <a class='dropdown-item' href='index.php?action=add_specimen'>Add specimen</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                     Users
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="index.php?action=show_users">List users</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.php?action=add_user">Add user</a>
+                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a class='dropdown-item' href='index.php?action=show_users'>List users</a>
+                    <div class='dropdown-divider'></div>
+                    <a class='dropdown-item' href='index.php?action=add_user'>Add user</a>
                 </div>
             </li>
         
-            <li class="nav-item">
-                <a class="nav-link" href="index.php?action=manage_bookings">Reservations</a>
+            <li class='nav-item'>
+                <a class='nav-link' href='index.php?action=manage_bookings'>Reservations</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.php?action=manage_rents">Rent a movie</a>
+            <li class='nav-item'>
+                <a class='nav-link' href='index.php?action=manage_rents'>Rent a movie</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="documentation.php">Documentation</a>
+            <li class='nav-item'>
+                <a class='nav-link' href='documentation.php'>Documentation</a>
+            </li>";
+            }
+            else if (isset($_SESSION['logged']) && $_SESSION['logged'] == true )
+            {
+                echo "
+                <li class='nav-item'>
+                <a class='nav-link' href='index.php'>Main page</a>
+            </li> 
+                <li class='nav-item'>
+                <a class='nav-link' href='index.php?action=show_specimen'> List specimen </a>
             </li>
+            <li class='nav-item'>
+                <a class='nav-link' href='index.php?action=my_bookings'>My reservations</a>
+            </li>
+            <li class='nav-item'>
+                <a class='nav-link' href='index.php?action=my_rents'>My rents</a>
+            </li>
+            <li class='nav-item'>
+                <a class='nav-link' href='documentation.php'>Documentation</a>
+            </li>";
+            }
+            else
+            {
+                echo "
+                <li class='nav-item'>
+                <a class='nav-link' href='index.php'>Main page</a>
+            </li> 
+        
+            <li class='nav-item'>
+                <a class='nav-link' href='documentation.php'>Documentation</a>
+            </li>";
+            }
+            ?>
             <?php
             if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
                 echo "<a class='nav-link' href='logout.php'>Logout</a>";
@@ -201,24 +236,9 @@ include 'queries.php';
         if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
             // funkcjonalnosci admina
             if ($_SESSION['imie'] == 'admin') {
-                echo
-                    "<a href='index.php'> MENU </a><br/>
-
-                            <a href='index.php?action=movies'> List movies </a>
-                            <a href='index.php?action=add_movie'> Add movie </a>
-                            <a href='index.php?action=show_directors'> List directors </a>
-                            <a href='index.php?action=add_director'> Add director </a>
-                            <a href='index.php?action=attatch_director'> Add director to movie </a>
-                            <a href='index.php?action=add_studio'> Add movie studio </a>
-                            <a href='index.php?action=add_type'> Add movie type </a>
-                            <a href='index.php?action=show_specimen'> List specimen </a>
-                            <a href='index.php?action=add_specimen'> Add specimen </a>
-		                    <a href='index.php?action=show_users'> List users </a> 
-                            <a href='index.php?action=add_user'> Add user </a>
-
-                            <a href='index.php?action=manage_bookings'> Manage bookings </a>
-                            <a href='index.php?action=manage_rents'> Manage rents </a>
-                            ";
+                echo "<a class='nav-link' href='#'><h1> Hello ". $_SESSION['imie'] . "</h1></a>";
+                echo "<h2> You are an admin so all options are available!</h2>";
+                echo "<h4> Login as user:user to get partial access</h4>";
                 $action = 'index';
                 if (isset($_GET['action'])) {
                     $action = $_GET['action'];
@@ -265,12 +285,10 @@ include 'queries.php';
                         break;
                 endswitch;
             } else {
-                echo "<nav>
-                <a href='index.php'> MENU </a><br/>
-                <a href='index.php?action=show_specimen'> List specimen </a>
-                <a href='index.php?action=my_bookings'> My reservations </a>
-                <a href='index.php?action=my_rents'> My rents </a>
-                </nav>";
+                
+                echo "<a class='nav-link' href='#'><h1> Hello ". $_SESSION['imie'] . "</h1></a>";
+                echo "<h2> You are a user so your options are limited!</h2>";
+                echo "<h4> Login as admin:admin to get full access</h4>";
                 $action = 'index';
                 if (isset($_GET['action'])) {
                     $action = $_GET['action'];
@@ -290,13 +308,12 @@ include 'queries.php';
         } else {
             echo "<h1> Witaj w wypozyczalni filmow</h1>
                 <h2> Zaloguj sie aby rozpoczac </h2>
-                <h3> Credentials: </h3>
-                <h4> ROOT: admin:admin</h4>
-                <h4> USER: michal:haslo </h4>";
+                <h5> ROOT: admin:admin</h5>
+                <h5> USER: michal:haslo </h5>";
             echo "<form action='login.php' method='post'>
                 Login: <input type='text' name='login'><br/>
                 Password: <input type='password' name='haslo'><br/>
-                <input type='submit' value='Zaloguj'>
+                <input type='submit' value='Login'>
                 </form>";
             if (isset($_SESSION['error']))
                 echo $_SESSION['error'];
