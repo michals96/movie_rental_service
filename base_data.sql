@@ -2,11 +2,11 @@
 
 
 -- uzytkownicy
-INSERT INTO widz VALUES (1, 'admin', 'admin','10.10.1990', 'admin', 'admin', 'AGH', 'admin');
-INSERT INTO widz VALUES (2, 'Michal', 'Stefaniuk','20.09.1996', 'michal', 'haslo', 'AGH', 'user');
-INSERT INTO widz VALUES (3, 'Jan', 'Kowalski', '19.12.1976', 'jan', 'haslo', 'UJ', 'user');
-INSERT INTO widz VALUES (4, 'Adam', 'Nowak', '03.05.1982', 'adam', 'haslo', 'UEK', 'user');
-INSERT INTO widz VALUES (5, 'Zbigniew', 'Stonoga', '22.10.1962', 'zbyszek', 'haslo', 'UP', 'user');
+INSERT INTO widz VALUES (1, 'admin', 'admin','10.10.1990', 'admin', 'admin', 'admin', 'AGH');
+INSERT INTO widz VALUES (2, 'user', 'user','20.09.1996', 'user', 'user', 'user', 'AGH');
+INSERT INTO widz VALUES (3, 'Jan', 'Kowalski', '19.12.1976', 'jan', 'haslo', 'user', 'UJ');
+INSERT INTO widz VALUES (4, 'Adam', 'Nowak', '03.05.1982', 'adam', 'haslo', 'user', 'UEK');
+INSERT INTO widz VALUES (5, 'Zbigniew', 'Stonoga', '22.10.1962', 'zbyszek', 'haslo', 'user', 'UP');
 
 --studia filmowe
 INSERT INTO studio VALUES(1, 'Warner Bros', 'Hollywood');
@@ -105,3 +105,4 @@ INSERT INTO widz_filmu VALUES(9, 4, 7);
 INSERT INTO widz_filmu VALUES(10, 4, 8);
 INSERT INTO widz_filmu VALUES(11, 5, 8);
 INSERT INTO widz_filmu VALUES(12, 5, 7);
+
