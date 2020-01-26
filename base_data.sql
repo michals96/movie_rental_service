@@ -76,21 +76,21 @@ update egzemplarz set czy_wypozyczony=true;
 INSERT INTO zamowienie VALUES(6, '28.07.2020', true, 3, 3);
 
 --wypozyczenia
-INSERT INTO wypozyczono VALUES(1, '29.01.2020', NULL, 2, 4);
-INSERT INTO wypozyczono VALUES(2, '29.01.2020', NULL, 3, 5);
-INSERT INTO wypozyczono VALUES(3, '29.01.2020', NULL, 4, 7);
-INSERT INTO wypozyczono VALUES(4, '29.01.2020', NULL, 5, 8);
-INSERT INTO wypozyczono VALUES(5, '29.01.2020', NULL, 2, 1);
-INSERT INTO wypozyczono VALUES(6, '29.01.2020', NULL, 3, 2);
+INSERT INTO wypozyczono VALUES(1, '01.01.2020', NULL, 2, 4);
+INSERT INTO wypozyczono VALUES(2, '01.01.2020', NULL, 3, 5);
+INSERT INTO wypozyczono VALUES(3, '01.01.2020', NULL, 4, 7);
+INSERT INTO wypozyczono VALUES(4, '01.01.2020', NULL, 5, 8);
+INSERT INTO wypozyczono VALUES(5, '01.01.2020', NULL, 2, 1);
+INSERT INTO wypozyczono VALUES(6, '01.01.2020', NULL, 3, 2);
 UPDATE wypozyczono SET data_end=CURRENT_DATE;
-INSERT INTO wypozyczono VALUES(7, '29.01.2020', NULL, 2, 5);
-INSERT INTO wypozyczono VALUES(8, '29.01.2020', NULL, 3, 4);
-INSERT INTO wypozyczono VALUES(9, '29.01.2020', NULL, 4, 8);
-INSERT INTO wypozyczono VALUES(10, '29.01.2020', NULL, 5, 7);
-INSERT INTO wypozyczono VALUES(11, '29.01.2020', NULL, 2, 2);
-INSERT INTO wypozyczono VALUES(12, '29.01.2020', NULL, 3, 1);
+INSERT INTO wypozyczono VALUES(7, '01.01.2020', NULL, 2, 5);
+INSERT INTO wypozyczono VALUES(8, '01.01.2020', NULL, 3, 4);
+INSERT INTO wypozyczono VALUES(9, '01.01.2020', NULL, 4, 8);
+INSERT INTO wypozyczono VALUES(10, '01.01.2020', NULL, 5, 7);
+INSERT INTO wypozyczono VALUES(11, '01.01.2020', NULL, 2, 2);
+INSERT INTO wypozyczono VALUES(12, '01.01.2020', NULL, 3, 1);
 UPDATE wypozyczono SET data_end=CURRENT_DATE;
-INSERT INTO wypozyczono VALUES(13, '29.01.2020', NULL, 5, 5);
+INSERT INTO wypozyczono VALUES(13, '01.01.2020', NULL, 5, 5);
 
 --widzowie filmow, powiazania
 INSERT INTO widz_filmu VALUES(1, 2, 4);

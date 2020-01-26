@@ -35,3 +35,75 @@ widz as w,
 egzemplarz as e, 
 film as f 
 WHERE wyp.widz_id=w.widz_id AND wyp.egzemplarz_id=e.egzemplarz_id AND e.film_id=f.film_id;
+
+--triggery
+
+
+-- a) funkcja i jej trigger weryfikujacy dostepnosc egzemplarza do rezerwacji
+CREATE OR REPLACE FUNCTION make_reservation() RETURNS TRIGGER AS $$
+	DECLARE
+		reservation_id integer;
+		specimen_id integer;
+		reservation boolean;
+		
+	BEGIN
+	specimen_id := new.egzemplarz_id;
+	SELECT czy_wypozyczony INTO reservation FROM egzemplarz WHERE egzemplarz_id=specimen_id;
+	
+	IF reservation = true
+		THEN UPDATE egzemplarz SET czy_wypozyczony=false WHERE egzemplarz_id=specimen_id;
+		RAISE INFO 'Reservation has been made';
+		RETURN new;
+	ELSE RAISE INFO 'Specimen is not available';
+		RETURN NULL;
+	END IF;
+	END;
+
+$$LANGUAGE 'plpgsql';
+
+CREATE TRIGGER reservation_trigger BEFORE INSERT ON zamowienie FOR EACH ROW EXECUTE PROCEDURE make_reservation();
+
+
+-- b) funkcja i jej trigger weryfikujacy dostepnosc egzemplarza do wypozyczenia
+CREATE OR REPLACE FUNCTION make_rent() RETURNS TRIGGER AS $$
+	DECLARE
+		flag_ifAvailable boolean;
+		count integer;
+	BEGIN
+	SELECT czy_wypozyczony INTO flag_ifAvailable FROM egzemplarz WHERE egzemplarz_id=new.egzemplarz_id;
+	
+	IF flag_ifAvailable = true
+		THEN UPDATE egzemplarz SET czy_wypozyczony=false WHERE egzemplarz_id=new.egzemplarz_id;
+		RAISE INFO 'Rent made';
+		RETURN new;
+	ELSE
+		SELECT COUNT(*) INTO count FROM zamowienie WHERE egzemplarz_id=new.egzemplarz_id AND widz_id=new.widz_id AND termin=true;
+		IF count!=0
+			THEN UPDATE zamowienie SET termin=false WHERE egzemplarz_id=new.egzemplarz_id AND widz_id=new.widz_id;
+			RAISE INFO 'Rent made';
+			RETURN new;
+		ELSE
+		RAISE INFO 'Specimen not available';
+		RETURN NULL;
+		END IF;
+	END IF;
+	END;
+
+$$LANGUAGE 'plpgsql';
+
+CREATE TRIGGER rent_trigger BEFORE INSERT ON wypozyczono FOR EACH ROW EXECUTE PROCEDURE make_rent();
+
+-- c) funkcja i jej trigger sluzacy do weryfikacji oddawania filmu
+CREATE OR REPLACE FUNCTION give_back() RETURNS TRIGGER AS $$
+	BEGIN
+	
+	IF new.data_end IS NOT NULL
+		THEN UPDATE egzemplarz SET czy_wypozyczony=true WHERE egzemplarz_id=old.egzemplarz_id;
+		RAISE INFO 'Specimen gave back';
+	END IF;
+		RETURN new;
+	END;
+
+$$LANGUAGE 'plpgsql';
+
+CREATE TRIGGER giveback_trigger BEFORE UPDATE ON wypozyczono FOR EACH ROW EXECUTE PROCEDURE give_back();

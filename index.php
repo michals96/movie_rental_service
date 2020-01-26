@@ -49,8 +49,8 @@ include 'queries.php';
 
         img {
             position: fixed;
-            margin-left: 45%;
-            margin-top: 1%;
+            margin-left: 55%;
+            margin-top: 10%;
             height: auto;
             width: 700px;
         }
@@ -140,23 +140,23 @@ include 'queries.php';
                     "<a href='index.php'> MENU </a><br/>
 
                             <a href='index.php?action=movies'> List movies </a>
-                            <a href='index.php?action=add_movie'> Add movie </a><br/>
+                            <a href='index.php?action=add_movie'> Add movie </a>
 
                             <a href='index.php?action=show_directors'> List directors </a>
-                            <a href='index.php?action=add_director'> Add director </a><br/>
+                            <a href='index.php?action=add_director'> Add director </a>
 
-                            <a href='index.php?action=attatch_director'> Add director to movie </a><br/>
-                            <a href='index.php?action=add_studio'> Add movie studio </a><br/>
-                            <a href='index.php?action=add_type'> Add movie type </a><br/>
+                            <a href='index.php?action=attatch_director'> Add director to movie </a>
+                            <a href='index.php?action=add_studio'> Add movie studio </a>
+                            <a href='index.php?action=add_type'> Add movie type </a>
 
                             <a href='index.php?action=show_specimen'> List specimen </a>
-                            <a href='index.php?action=add_specimen'> Add specimen </a><br/>
+                            <a href='index.php?action=add_specimen'> Add specimen </a>
 
 		                    <a href='index.php?action=show_users'> List users </a> 
-                            <a href='index.php?action=add_user'> Add user </a><br/>
+                            <a href='index.php?action=add_user'> Add user </a>
 
-                            <a href='index.php?action=manage_bookings'> Manage bookings </a><br/>
-                            <a href='index.php?action=manage_rents'> Manage rents </a><br/>
+                            <a href='index.php?action=manage_bookings'> Manage bookings </a>
+                            <a href='index.php?action=manage_rents'> Manage rents </a>
                             ";
                 $action = 'index';
                 if (isset($_GET['action'])) {
@@ -207,8 +207,8 @@ include 'queries.php';
                     echo "<nav>
                 <a href='index.php'> MENU </a><br/>
                 <a href='index.php?action=show_specimen'> List specimen </a><br/>
-                <a href='index.php?action=my_bookings'> Moje rezerwacje </a><br/>
-                <a href='index.php?action=my_rents'> Moje wypozyczenia </a><br/>
+                <a href='index.php?action=my_bookings'> My reservations </a><br/>
+                <a href='index.php?action=my_rents'> My rents </a><br/>
                 </nav>";
                     $action = 'index';
                     if (isset($_GET['action'])) {
