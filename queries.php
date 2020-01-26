@@ -101,7 +101,7 @@ class queries
             $sort = $_POST['sort'];
         $query = pg_query("SELECT rezyser.imie, rezyser.nazwisko from rezyser ORDER BY $sort");
         echo "<table>";
-        echo "<tr><td>Imię</td> <td>Nazwisko</td>";
+        echo "<tr><td>Name</td> <td>Surname</td>";
         while ($row = pg_fetch_row($query)) {
             echo "<tr> <td>$row[0]</td> <td>$row[1]</td></tr>";
         }

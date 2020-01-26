@@ -309,7 +309,7 @@ include 'queries.php';
             echo "<h1> Witaj w wypozyczalni filmow</h1>
                 <h2> Zaloguj sie aby rozpoczac </h2>
                 <h5> ROOT: admin:admin</h5>
-                <h5> USER: michal:haslo </h5>";
+                <h5> USER: user:user </h5>";
             echo "<form action='login.php' method='post'>
                 Login: <input type='text' name='login'><br/>
                 Password: <input type='password' name='haslo'><br/>
