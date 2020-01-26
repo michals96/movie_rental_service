@@ -119,6 +119,71 @@ include 'queries.php';
             <li class="nav-item">
                 <a class="nav-link" href="index.php">Main page</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Movies
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?action=movies">List movies</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?action=add_movie">Add movie</a>
+                </div>
+                
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Directors
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?action=show_directors">List directors</a>
+                    <a class="dropdown-item" href="index.php?action=add_director">Add directors</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?action=attatch_director">Attatch director</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Studios
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?action=add_studio">Add movie studio</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Category
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?action=add_type">Add movie type</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Specimen
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?action=show_specimen">List specimen</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?action=add_specimen">Add specimen</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Users
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="index.php?action=show_users">List users</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.php?action=add_user">Add user</a>
+                </div>
+            </li>
+        
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=manage_bookings">Reservations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=manage_rents">Rent a movie</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="documentation.php">Documentation</a>
             </li>
@@ -141,17 +206,13 @@ include 'queries.php';
 
                             <a href='index.php?action=movies'> List movies </a>
                             <a href='index.php?action=add_movie'> Add movie </a>
-
                             <a href='index.php?action=show_directors'> List directors </a>
                             <a href='index.php?action=add_director'> Add director </a>
-
                             <a href='index.php?action=attatch_director'> Add director to movie </a>
                             <a href='index.php?action=add_studio'> Add movie studio </a>
                             <a href='index.php?action=add_type'> Add movie type </a>
-
                             <a href='index.php?action=show_specimen'> List specimen </a>
                             <a href='index.php?action=add_specimen'> Add specimen </a>
-
 		                    <a href='index.php?action=show_users'> List users </a> 
                             <a href='index.php?action=add_user'> Add user </a>
 
@@ -160,8 +221,8 @@ include 'queries.php';
                             ";
                 $action = 'index';
                 if (isset($_GET['action'])) {
-                        $action = $_GET['action'];
-                    }
+                    $action = $_GET['action'];
+                }
                 $akcja = new queries;
                 switch ($action): case 'movies':
                         $akcja->movies();
@@ -204,29 +265,28 @@ include 'queries.php';
                         break;
                 endswitch;
             } else {
-                    echo "<nav>
+                echo "<nav>
                 <a href='index.php'> MENU </a><br/>
                 <a href='index.php?action=show_specimen'> List specimen </a>
                 <a href='index.php?action=my_bookings'> My reservations </a>
                 <a href='index.php?action=my_rents'> My rents </a>
                 </nav>";
-                    $action = 'index';
-                    if (isset($_GET['action'])) {
-                            $action = $_GET['action'];
-                        }
-                    $akcja = new queries;
-                    switch ($action): 
-                        case 'show_specimen':
-                            $akcja->show_specimen();
-                            break;
-                        case 'my_bookings':
-                            $akcja->my_bookings();
-                            break;
-                        case 'my_rents':
-                            $akcja->my_rents();
-                            break;
-                    endswitch;
+                $action = 'index';
+                if (isset($_GET['action'])) {
+                    $action = $_GET['action'];
                 }
+                $akcja = new queries;
+                switch ($action): case 'show_specimen':
+                        $akcja->show_specimen();
+                        break;
+                    case 'my_bookings':
+                        $akcja->my_bookings();
+                        break;
+                    case 'my_rents':
+                        $akcja->my_rents();
+                        break;
+                endswitch;
+            }
         } else {
             echo "<h1> Witaj w wypozyczalni filmow</h1>
                 <h2> Zaloguj sie aby rozpoczac </h2>
